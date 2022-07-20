@@ -1,5 +1,8 @@
+
+
 <?php
 	require ('helper.php');
+	require ('config.php');
 	session_start();
 if (isset($_SESSION['Islogin']) && $_SESSION['Islogin'] === true) {
 	echo "logged in ";
@@ -9,13 +12,6 @@ if (isset($_SESSION['Islogin']) && $_SESSION['Islogin'] === true) {
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	if (isset($_POST['register'])) {
-
-		//connecting to db
-		$dsn = 'mysql:dbname=db_stock;host=localhost';
-		$user = 'root';
-		$pass = '';
-		$pdo = new PDO($dsn,$user,$pass);
-
 		if (isset($_POST['username']) && isset($_POST['password'])) {
 			
 
@@ -64,13 +60,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 	elseif (isset($_POST['login'])) {
 
-		//connecting to db
-		$dsn = 'mysql:dbname=db_stock;host=localhost';
-		$user = 'root';
-		$pass = '';
-
-		$pdo = new PDO($dsn,$user,$pass);
-		
 		if (isset($_POST['username']) && isset($_POST['password'])) {
 			
 			$log_username = trim($_POST['username']);
@@ -120,7 +109,7 @@ else{
 			$page = 'login';
 		}
 		else{
-			$page = 'register';
+			$page = 'homepage';
 		}
 
 		renderpage($page);

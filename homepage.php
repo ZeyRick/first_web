@@ -24,19 +24,8 @@
     <div class="fl_right"> 
       <!-- ################################################################################################ -->
       <ul class="nospace">
-        <li><a href="#" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
-        <li><a href="#" title="Sign Up"><i class="fas fa-edit"></i></a></li>
-        <li id="searchform">
-          <div>
-            <form action="#" method="post">
-              <fieldset>
-                <legend>Quick Search:</legend>
-                <input type="text" placeholder="Enter search term&hellip;">
-                <button type="submit"><i class="fas fa-search"></i></button>
-              </fieldset>
-            </form>
-          </div>
-        </li>
+        <li><a href="./login.php" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
+        <li><a href="./register.php" title="Sign Up"><i class="fas fa-edit"></i></a></li>
       </ul>
       <!-- ################################################################################################ -->
     </div>
@@ -46,7 +35,7 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
-<div class="bgded" style="background-image:url('images/demo/backgrounds/01.png');"> 
+<div class="bgded" style="background-image:url('images/demo/backgrounds/01.png') ;"> 
   <!-- ################################################################################################ -->
   <div class="wrapper row1">
     <header id="header" class="hoc clear">

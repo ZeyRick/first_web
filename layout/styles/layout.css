@@ -73,7 +73,7 @@ File: Layout CSS
 .sectiontitle *{margin:0;}
 
 /* Introblocks - x3 */
-#introblocks{display:block; position:relative; margin:-280px 0 0 0; z-index:1; text-align:center;}/* 280px => 200px + container padding */
+#introblocks{display:block; position:relative; margin:-50px 0 0 0; z-index:1; text-align:center;}/* 280px => 200px + container padding */
 #introblocks figure{display:block; position:relative; max-width:348px; text-align:center;}
 #introblocks figure figcaption{display:block; position:absolute; bottom:0; width:100%; padding:0 20px;}
 #introblocks figure figcaption *{margin:0; padding:0;}
