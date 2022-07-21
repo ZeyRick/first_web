@@ -2,7 +2,7 @@
 	
 	function renderpage($page, $data=array()){
 		extract($data);
-		$path = "./" . $page . ".php";
+		$path = "./pages/" . $page . ".php";
 		require($path);
 
 	}

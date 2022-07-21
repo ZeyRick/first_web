@@ -6,7 +6,7 @@
 	session_start();
 if (isset($_SESSION['Islogin']) && $_SESSION['Islogin'] === true) {
 	echo "logged in ";
-	header("Location: ./homepage.php");
+	header("Location: ./pages/homepage.php");
 	exit();
 }
 
@@ -106,7 +106,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 else{
 		if (isset($_GET['login'])) {
-			$page = 'login';
+			$page = 'signup';
 		}
 		else{
 			$page = 'homepage';
