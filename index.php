@@ -20,17 +20,18 @@ if (isset($_GET['q']) ) {
 	}
 }
 
-if (isset($_SESSION['userID'])) {
-	//selecting the user name
-		$sql = "SELECT * FROM users WHERE userID = :userID LIMIT 1";
-		$prepared = $pdo->prepare($sql);
-		$prepared->execute([':userID'=>$_SESSION['userID']]);
-		//fetch the file that is selected
-		$getuser = $prepared->fetch();
-		$_SESSION['username'] = $getuser['Username'];
-		$_SESSION['userID'] = $getuser['userID'];
-		$_SESSION['pfp'] = $getuser['pfp'];
-}
+// if (isset($_SESSION['userID'])) {
+// 	//selecting the user name
+// 		$sql = "SELECT * FROM users WHERE userID = :userID LIMIT 1";
+// 		$prepared = $pdo->prepare($sql);
+// 		$prepared->execute([':userID'=>$_SESSION['userID']]);
+// 		//fetch the file that is selected
+// 		$getuser = $prepared->fetch();
+// 		//re sessioning
+// 		$_SESSION['username'] = $getuser['Username'];
+// 		$_SESSION['userID'] = $getuser['userID'];
+// 		$_SESSION['pfp'] = $getuser['pfp'];
+// }
 
 
 
@@ -129,11 +130,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		//change pfp
 	elseif(isset($_POST['changepfp'])){
 		unlink($imgfolder . $_SESSION['pfp']);
-		$filename = $_FILES['pic']['name'];
-		move_uploaded_file(	$_FILES['pic']['tmp_name'], $imgfolder	. $filename	);
+		$olfpfpname = $_FILES['pic']['name'];
+		move_uploaded_file(	$_FILES['pic']['tmp_name'], $imgfolder	. $olfpfpname	);
+		$newpfpname = $_SESSION['userID'] . '.png';
+		rename($imgfolder . $olfpfpname, $imgfolder . $newpfpname);
+		$_SESSION['pfp'] = $newpfpname;
 		$sql = "UPDATE users SET pfp=:pfp WHERE userID = :userID";
 		$prepared = $pdo->prepare($sql);
-		$prepared->execute([':pfp'=>$filename, ':userID' => $_SESSION['userID']]);
+		$prepared->execute([':pfp'=>$newpfpname, ':userID' => $_SESSION['userID']]);
 	}
 
 }
