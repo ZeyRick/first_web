@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="layout/styles/custom.css">
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
@@ -16,6 +17,7 @@
     <div class="fl_left"> 
       <!-- ################################################################################################ -->
       <ul class="nospace">
+
         <li><i class="fas fa-phone rgtspace-5"></i> +855 (066) 840 729</li>
         <li><i class="far fa-envelope rgtspace-5"></i> skyfox@gmail.com</li>
       </ul>
@@ -24,8 +26,7 @@
     <div class="fl_right"> 
       <!-- ################################################################################################ -->
       <ul class="nospace">
-        <li><a href="./pages/signup.php?q=login" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
-        <li><a href="./pages/signup.php" title="Sign Up"><i class="fas fa-edit"></i></a></li>
+        <?php loginbar(); ?>
       </ul>
       <!-- ################################################################################################ -->
     </div>
@@ -41,13 +42,13 @@
     <header id="header" class="hoc clear">
       <div id="logo" class="fl_left"> 
         <!-- ################################################################################################ -->
-        <h1><a href="homepage.php">SkyFox Trip</a></h1>
+        <h1><a href="./">SkyFox Trip</a></h1>
         <!-- ################################################################################################ -->
       </div>
       <nav id="mainav" class="fl_right"> 
         <!-- ################################################################################################ -->
         <ul class="clear">
-          <li class="active"><a href="homepage.php">Home</a></li>
+          <li class="active"><a href="./">Home</a></li>
           <li><a href="pages/gallery.html">BOOK TRIP</a></li>
           <li><a href="#">ABOUT US</a>
         </ul>
@@ -81,103 +82,7 @@
     <!-- ################################################################################################ -->
     <section id="introblocks">
       <ul class="nospace group btmspace-80">
-        <li class="one_third first">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Mollis suscipit</h6>
-              <div>
-                <p>Eu adipiscing sit amet ante donec vulputate magna duis posuere tellus vel fringilla auctor nisi arcu.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Vestibulum maecenas</h6>
-              <div>
-                <p>Urna at congue lectus nisi ac neque suspendisse vitae sapien eu mi placerat tincidunt sed eget elit in.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Pellentesque enim</h6>
-              <div>
-                <p>Imperdiet pede sit amet elit aenean sollicitudin eros quis cursus feugiat lacus diam tempor tortor vel.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-
-      </ul>
-      <ul class="nospace group btmspace-80">
-        <li class="one_third first">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Mollis suscipit</h6>
-              <div>
-                <p>Eu adipiscing sit amet ante donec vulputate magna duis posuere tellus vel fringilla auctor nisi arcu.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Vestibulum maecenas</h6>
-              <div>
-                <p>Urna at congue lectus nisi ac neque suspendisse vitae sapien eu mi placerat tincidunt sed eget elit in.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Pellentesque enim</h6>
-              <div>
-                <p>Imperdiet pede sit amet elit aenean sollicitudin eros quis cursus feugiat lacus diam tempor tortor vel.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        
-      </ul>
-      <ul class="nospace group btmspace-80">
-        <li class="one_third first">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Mollis suscipit</h6>
-              <div>
-                <p>Eu adipiscing sit amet ante donec vulputate magna duis posuere tellus vel fringilla auctor nisi arcu.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Vestibulum maecenas</h6>
-              <div>
-                <p>Urna at congue lectus nisi ac neque suspendisse vitae sapien eu mi placerat tincidunt sed eget elit in.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Pellentesque enim</h6>
-              <div>
-                <p>Imperdiet pede sit amet elit aenean sollicitudin eros quis cursus feugiat lacus diam tempor tortor vel.</p>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-        
+        <?php renderimg(); ?>
       </ul>
     </section>
 </div>
@@ -223,5 +128,6 @@
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery.backtotop.js"></script>
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
+<script src="layout/scripts/custom.js"></script>
 </body>
 </html>

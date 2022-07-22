@@ -20,7 +20,7 @@
 		<input type="checkbox" id="chk" aria-hidden="true" <?php if (isset($_GET['q'])){?> checked <?php } ?> >
 
 			<div class="signup">
-				<form action="./" method="post" >
+				<form action="../" method="post" >
 					<label for="chk" aria-hidden="true">Sign up</label>
 					<input type="text" name="username" placeholder="Username" required="">
 					<input type="password" name="password" placeholder="Password" required="">
@@ -29,7 +29,7 @@
 			</div>
 
 			<div class="login">
-				<form action="./" method="post">
+				<form action="../" method="post">
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="text" name="username" placeholder="Username" required="">
 					<input type="password" name="password" placeholder="Password" required="">

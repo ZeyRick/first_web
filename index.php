@@ -4,11 +4,35 @@
 	require ('helper.php');
 	require ('config.php');
 	session_start();
-if (isset($_SESSION['Islogin']) && $_SESSION['Islogin'] === true) {
-	echo "logged in ";
-	header("Location: ./pages/homepage.php");
-	exit();
+if (isset($_GET['q']) ) {
+	$q = $_GET['q'];
+	switch ($q) {
+		case 'logout':
+			session_destroy();
+			header("Refresh:0; url=./");
+			break;
+		
+		default:
+			$page = 'changepfp';
+			renderpage($page);
+			exit();
+			break;
+	}
 }
+
+if (isset($_SESSION['userID'])) {
+	//selecting the user name
+		$sql = "SELECT * FROM users WHERE userID = :userID LIMIT 1";
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':userID'=>$_SESSION['userID']]);
+		//fetch the file that is selected
+		$getuser = $prepared->fetch();
+		$_SESSION['username'] = $getuser['Username'];
+		$_SESSION['userID'] = $getuser['userID'];
+		$_SESSION['pfp'] = $getuser['pfp'];
+}
+
+
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	if (isset($_POST['register'])) {
@@ -79,8 +103,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 			
 				//if right pw
 				if ($pwcompare) {
-					$_SESSION['Islogin'] = true;
-					renderpage("homepage",array("name"=>$log_username));
+					$_SESSION['userID'] = $getuser['userID'];
+					header("Refresh:0; url=./");
 				}
 				//if wrong pw
 				else{
@@ -96,24 +120,28 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 			}
 		}
 
-
 		$_POST = array();
 
 		// code...
 	}
 
+
+		//change pfp
+	elseif(isset($_POST['changepfp'])){
+		unlink($imgfolder . $_SESSION['pfp']);
+		$filename = $_FILES['pic']['name'];
+		move_uploaded_file(	$_FILES['pic']['tmp_name'], $imgfolder	. $filename	);
+		$sql = "UPDATE users SET pfp=:pfp WHERE userID = :userID";
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':pfp'=>$filename, ':userID' => $_SESSION['userID']]);
+	}
+
 }
 
-else{
-		if (isset($_GET['login'])) {
-			$page = 'signup';
-		}
-		else{
-			$page = 'homepage';
-		}
 
-		renderpage($page);
-}
+$page = 'homepage';
+renderpage($page);
+exit();
 
 	
 ?>
