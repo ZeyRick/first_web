@@ -1,8 +1,9 @@
 
 
 <?php
-	require ('helper.php');
-	require ('config.php');
+	require_once('config.php');
+	require_once('helper.php');
+
 	session_start();
 if (isset($_GET['q']) ) {
 	$q = $_GET['q'];
@@ -20,18 +21,17 @@ if (isset($_GET['q']) ) {
 	}
 }
 
-// if (isset($_SESSION['userID'])) {
-// 	//selecting the user name
-// 		$sql = "SELECT * FROM users WHERE userID = :userID LIMIT 1";
-// 		$prepared = $pdo->prepare($sql);
-// 		$prepared->execute([':userID'=>$_SESSION['userID']]);
-// 		//fetch the file that is selected
-// 		$getuser = $prepared->fetch();
-// 		//re sessioning
-// 		$_SESSION['username'] = $getuser['Username'];
-// 		$_SESSION['userID'] = $getuser['userID'];
-// 		$_SESSION['pfp'] = $getuser['pfp'];
-// }
+if (isset($_SESSION['userID'])) {
+	//selecting the user name
+		$sql = "SELECT * FROM users WHERE userID = :userID LIMIT 1";
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':userID'=>$_SESSION['userID']]);
+		//fetch the file that is selected
+		$getuser = $prepared->fetch();
+		//re sessioning
+		$_SESSION['username'] = $getuser['Username'];
+		$_SESSION['pfp'] = $getuser['pfp'];
+}
 
 
 
@@ -64,10 +64,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 			
 				//insert into users table
-				$sql = "INSERT INTO users (Username, Password) VALUES (:username, :password)";
+				$sql = "INSERT INTO users (Username, Password, pfp) VALUES (:username, :password, :pfp)";
 				$prepared = $pdo->prepare($sql);
-				if ($prepared->execute([':username'=>$reg_username, ':password'=>$reg_passHash])){
+				if ($prepared->execute([':username'=>$reg_username, ':password'=>$reg_passHash, ':pfp'=>$default_pfp])){
 					echo "Registered Successfully";
+
 				}
 
 				else {
@@ -129,11 +130,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		//change pfp
 	elseif(isset($_POST['changepfp'])){
-		unlink($imgfolder . $_SESSION['pfp']);
+		@unlink($pfpfolder . $_SESSION['userID'] . 'png');
 		$olfpfpname = $_FILES['pic']['name'];
-		move_uploaded_file(	$_FILES['pic']['tmp_name'], $imgfolder	. $olfpfpname	);
+		move_uploaded_file(	$_FILES['pic']['tmp_name'], $pfpfolder	. $olfpfpname	);
 		$newpfpname = $_SESSION['userID'] . '.png';
-		rename($imgfolder . $olfpfpname, $imgfolder . $newpfpname);
+		rename($pfpfolder . $olfpfpname, $pfpfolder . $newpfpname);
 		$_SESSION['pfp'] = $newpfpname;
 		$sql = "UPDATE users SET pfp=:pfp WHERE userID = :userID";
 		$prepared = $pdo->prepare($sql);

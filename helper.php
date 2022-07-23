@@ -47,11 +47,30 @@
 
 	function renderimg(){
 
+		//connecting to db
+		$dsn = 'mysql:dbname=db_stock;host=localhost';
+		$user = 'root';
+		$pass = '';
+		$pdo = new PDO($dsn,$user,$pass);
+
+		$imgfolder= 'images/';
+		$pfpfolder = 'images/pfp/';
+		$default_pfp = 'avatar.png';
+
+
+
+		$sql = 'SELECT img FROM images ORDER BY RAND() LIMIT 9';
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute();
+		$getimg = $prepared->fetchAll();
+
+		$count = 0;
+
 		for ($i=0; $i < 3; $i++) { 
 			echo '<ul class="nospace group btmspace-80">';
 			echo 
 		'<li class="one_third first">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
+          <figure><a class="imgover" href="#"><img class="crop2"src="' . $imgfolder . $getimg[$count]["img"] .'" alt=""></a>
             <figcaption>
               <h6 class="heading">Mollis suscipit</h6>
               <div>
@@ -60,9 +79,11 @@
             </figcaption>
           </figure>
         </li>';
+
+       $count += 1;
 			for ($j=0; $j < 2; $j++) { 
 				echo '<li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
+          <figure><a class="imgover" href="#"><div class = "crop2"><img  src="'. $imgfolder . $getimg[$count]["img"] .'" alt=""></div></a>
             <figcaption>
               <h6 class="heading">Vestibulum maecenas</h6>
               <div>
@@ -71,6 +92,9 @@
             </figcaption>
           </figure>
         </li>';
+
+
+        $count += 1;
 			}
 			echo '</ul>';
 		}

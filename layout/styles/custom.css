@@ -12,3 +12,18 @@
   height: 100%;
   width: auto;
 }
+
+
+   .crop2 {
+        width: 348px;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .crop2 img {
+        min-width:348px;
+        min-height:400px;
+        width: auto;
+        height: auto;
+    }
+
