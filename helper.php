@@ -59,10 +59,14 @@
 
 
 
-		$sql = 'SELECT img FROM images ORDER BY RAND() LIMIT 9';
+		$sql = 'SELECT * FROM images 
+		INNER JOIN views ON images.viewID = views.viewID
+		INNER JOIN locations ON views.locID = locations.locID
+		ORDER BY RAND() LIMIT 9';
 		$prepared = $pdo->prepare($sql);
 		$prepared->execute();
 		$getimg = $prepared->fetchAll();
+
 
 		$count = 0;
 
@@ -72,9 +76,9 @@
 		'<li class="one_third first">
           <figure><a class="imgover" href="#"><img class="crop2"src="' . $imgfolder . $getimg[$count]["img"] .'" alt=""></a>
             <figcaption>
-              <h6 class="heading">Mollis suscipit</h6>
+              <h6 class="heading">'. $getimg[$count]["City"] . ', ' . $getimg[$count]["Country"] . '</h6>
               <div>
-                <p>Eu adipiscing sit amet ante donec vulputate magna duis posuere tellus vel fringilla auctor nisi arcu.</p>
+                <p> '. $getimg[$count]["LocDescription"] .'</p>
               </div>
             </figcaption>
           </figure>
@@ -83,11 +87,11 @@
        $count += 1;
 			for ($j=0; $j < 2; $j++) { 
 				echo '<li class="one_third">
-          <figure><a class="imgover" href="#"><div class = "crop2"><img  src="'. $imgfolder . $getimg[$count]["img"] .'" alt=""></div></a>
+          <figure><a class="imgover" href="#"><img class = "crop2" src="'. $imgfolder . $getimg[$count]["img"] .'" alt=""></a>
             <figcaption>
               <h6 class="heading">Vestibulum maecenas</h6>
               <div>
-                <p>Urna at congue lectus nisi ac neque suspendisse vitae sapien eu mi placerat tincidunt sed eget elit in.</p>
+                <p> ' . $getimg[$count]["LocDescription"] . ' </p>
               </div>
             </figcaption>
           </figure>
