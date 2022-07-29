@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+:root{
+	--primary-color: #FF9600;
+	--darken-color: #004896;
+}
+*{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+body{
+	font-family: Roboto, Arial;
+	padding: 0 100px;
+	background-color: #EEEEEE;
+}
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}

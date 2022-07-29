@@ -1,0 +1,49 @@
+header{
+	position: fixed;
+	top:0; left: 0; right: 0;
+	display: flex;
+	height: 80px;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+	font-weight: 400;
+	font-size: 18px;
+	color:black;
+	border-bottom: 1px solid #ECECEC;
+	img{
+		width: 150px;
+		margin-left: 50px;
+		margin-right: 80px;
+	}
+
+	.nav{
+		
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex:1;
+		white-space: nowrap;
+		text-align: center;
+		cursor: pointer;
+		div{
+			padding: 28px 0;
+			text-align:center;
+			width: 150px;
+			a{
+				height: 100%;
+			}
+		}
+
+		div:hover{
+			color: black;
+			background-color: var(--primary-color);
+			border-bottom: 2px black solid;
+		}
+	}
+
+
+	.login{
+		margin-left:80px;
+		width: 180px;
+	}
+}

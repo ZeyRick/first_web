@@ -1,0 +1,87 @@
+main{
+	align-items: center;
+	justify-content: center;
+	display: grid;
+	gird-template-rows: 1fr 1fr 1fr;
+	margin-top: 180px;
+	padding: 160px 80px;
+	border: 1px lightgray solid;
+	background-color: white;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+table{
+	display: flex;
+	flex-direction: column;
+	font-size: 20px;
+	
+}
+
+
+
+tr{
+	border: 1px lightgray solid;
+	display: grid;
+	grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+tr:hover{
+	background-color: #F3F3F3;
+}
+
+th{
+	height: 60px;
+	padding-top: 25px;
+	background-color: #E4E4E4;
+}
+
+td{
+	padding-top: 25px;
+	text-align: center;
+	height: 40px;
+}
+
+.delete{
+	display: flex;
+	justify-content: space-between;
+}
+
+.delete a{
+	margin: 0 20px;
+}
+
+.delete a:hover{
+	color: var(--primary-color);
+}
+
+.checkbox{
+	padding-left: 30px;
+}
+
+input[type="checkbox"]{
+	 transform: scale(1.5);
+	 accent-color:  var(--primary-color);
+}
+
+
+.command-buttons{
+	display: flex;
+	padding-bottom: 50px;
+	border-bottom: 1px black solid;
+}
+
+#addnew-btn, #delete-btn{
+	all: unset;
+	background-color: var(--primary-color);
+	padding: 20px 35px;
+	border-radius: 10px;
+	border: 2px #CC7300 solid;
+	color: white;
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+#addnew-btn:hover, #delete-btn:hover{
+	background-color: #F8B954;
+}

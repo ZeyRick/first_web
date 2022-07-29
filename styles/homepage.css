@@ -1,0 +1,88 @@
+body{
+	padding: 0;
+	margin-bottom: 10000px;
+	background-color: white;
+}
+main{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	margin-top: 60px;
+	justify-content: center;
+	padding: 0 100px;
+	grid-column-gap: 20px;
+}
+
+
+.hero{
+	margin-top: 60px;
+	width: 100%;
+	background-color: lightblue;
+}
+
+.contents{
+	background-color: #EBEBEB;	
+}
+
+
+.image img{
+	width: 100%;
+
+}
+
+.txt{
+	diplay: flex;
+	padding: 5px 30px;
+	align-items: center;
+	text-align: center;
+
+}
+
+#title{
+	font-size: 28px;
+	color: #a71d31;
+}
+
+#description{
+	font-size: 18px;
+}
+#title, #description{
+	margin-bottom: 15px;
+}
+
+
+.txt div{
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.txt #book-btn{
+	font-size: 18px;
+	width: 120px;
+	height: 35px;
+	border-radius: 10px;
+	color: white;
+	background-color: #650811;
+	background-image: linear-gradient(315deg, #650811 0%, #a71d31 74%);
+	cursor: pointer;
+	border: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.txt #book-btn:hover{
+	background-color: #650811;
+	background-image: linear-gradient(315deg, #a71d31 0%, #650811 74%);
+}
+
+.content{
+	transition: margin-top 0.15s, opacity 0.15s;
+	padding-bottom: 10px;
+
+}
+
+.content:hover{
+	margin-top: -20px;
+	opacity: 0.8;
+}
