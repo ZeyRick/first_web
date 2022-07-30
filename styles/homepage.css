@@ -21,6 +21,7 @@ main{
 
 .contents{
 	background-color: #EBEBEB;	
+	margin-bottom: 60px;
 }
 
 
@@ -84,7 +85,6 @@ main{
 .content{
 	transition: margin-top 0.15s, opacity 0.15s;
 	padding-bottom: 10px;
-
 }
 
 .content:hover{

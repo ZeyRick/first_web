@@ -48,12 +48,12 @@ td{
 	justify-content: space-between;
 }
 
-.delete a{
+.delete a, .delete-button{
 	margin-left: 10px;
 	margin-right: 20px;
 }
 
-.delete a:hover{
+.delete-button:hover, a:hover{
 	color: var(--primary-color);
 }
 
@@ -73,7 +73,7 @@ input[type="checkbox"]{
 	border-bottom: 1px black solid;
 }
 
-#addnew-btn, #delete-btn{
+ #addnew-btn, #delete-btn{
 	all: unset;
 	background-color: var(--primary-color);
 	padding: 20px 32px;
@@ -85,6 +85,14 @@ input[type="checkbox"]{
 	font-size: 22px;
 }
 
+#addnew-btn{
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	text-align: center;
+}
+
+
 #addnew-btn:hover, #delete-btn:hover{
 	background-color: #F8B954;
 }
@@ -92,4 +100,19 @@ input[type="checkbox"]{
 td img{
 	vertical-align: top;
 	height: 100px;
+}
+
+.delete-button{
+	position: relative;
+}
+
+.delete input{
+	background-color: transparent;
+	color: transparent;
+	border: none;
+	width: 100%;
+	position: absolute;
+	right: 0; top: 0; left: 0;
+	z-index: 2;
+	cursor: pointer;
 }

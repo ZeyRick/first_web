@@ -1,8 +1,8 @@
 
 
 <?php
-	require_once('config.php');
-	require_once('helper.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/htdocs1/first_web/config.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/htdocs1/first_web/helper.php');
 
 	session_start();
 if (isset($_GET['q']) ) {
@@ -18,7 +18,7 @@ if (isset($_GET['q']) ) {
 			renderpage($page);
 			exit();
 			break;
-		case 'Add New Tour':
+		case 'addnew':
 			$page = 'add_new';
 			renderpage($page);
 			exit();
@@ -143,7 +143,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$duration = $_POST['duration'];
 		$price = $_POST['price'];
 		$description = $_POST['description'];
-		$image = $name . '.png';
+		$image = str_replace(' ', '-', $name) . '.png';
 		//moving photo into folder
 		move_uploaded_file(	$_FILES['photo']['tmp_name'], $imgfolder . $image	);
 	
@@ -151,16 +151,41 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$sql = 'INSERT INTO locations (Name, Province, Duration, Price, Description, Image) VALUES (:name, :province, :duration, :price, :description, :image)';
 		$prepared = $pdo->prepare($sql);
 		$prepared->execute([':name'=>$name, ':province'=>$province, ':duration'=>$duration, ':price'=>$price, 'description'=>$description, ':image'=>$image]);
-
+		echo "<meta http-equiv='refresh' content='0'>";
+		exit();
 
 	}
 
+
+	elseif(isset($_POST['delete'])){
+		
+	foreach($_POST['delete'] as $id):
+		//delte img
+		$sql = 'SELECT Name FROM locations WHERE locID = :id LIMIT 1';
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':id'=>$id]);
+		$name = $prepared->fetch();
+		@unlink($imgfolder . $name['Name'] . '.png');
+
+		//delete data 
+		$sql = 'DELETE FROM locations WHERE locID = :id';
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':id'=>$id]);
+
+		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}?q=backend";
+		$escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
+		echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$url.'">';
+	endforeach;
+		exit();
+	}
+
 		//change pfp
-	elseif(isset($_POST['changepfp'])){
-		@unlink($pfpfolder . $_SESSION['userID'] . 'png');
+		elseif(isset($_POST['changepfp'])){
+		@unlink($pfpfolder . $_SESSION['userID'] . '.png');
 		$olfpfpname = $_FILES['pic']['name'];
 		move_uploaded_file(	$_FILES['pic']['tmp_name'], $pfpfolder	. $olfpfpname	);
 		$newpfpname = $_SESSION['userID'] . '.png';
+		$newpfpname = str_replace(' ', '-', $newpfpname);
 		rename($pfpfolder . $olfpfpname, $pfpfolder . $newpfpname);
 		$_SESSION['pfp'] = $newpfpname;
 		$sql = "UPDATE users SET pfp=:pfp WHERE userID = :userID";

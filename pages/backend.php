@@ -9,15 +9,15 @@
 	<link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
-	<form action="./" method="get">
+	<form action="./" method="post">
 		
 	
 	<?php renderpage('header');?>
 
 	<main>
 			<div class="command-buttons">
-				<input type="submit" id="addnew-btn" value="Add New Tour" name="q">
-				<input type="submit" id="delete-btn" value="Delete">
+				<a  id="addnew-btn"  href="./?q=addnew">Add New</a>
+				<input type="submit" id="delete-btn" value="Delete Tours">
 			</div>
 			<table>
 				<tr>
@@ -48,16 +48,20 @@
 		$sum += 1;
 		?>
 				<tr class="data-row">
-					<td class="checkbox"><input type="checkbox" name=""></td>
+					<td class="checkbox"><input type="checkbox" name="delete[]" value="<?php echo htmlspecialchars($data["locID"])  ?>"></td>
 					<td><?php echo $data["locID"] ?> </td>
-					<td><?php echo $data["Name"] ?> </td>
-					<td><?php echo $data["Province"] ?> </td>
-					<td><?php echo $data["Duration"] ?> </td>
-					<td><?php echo $data["Price"] ?> </td>
-					<td><<img src=" <?php echo $imgfolder . $data["Image"] ?>" alt="img"></td>
+					<td><?php echo htmlspecialchars($data["Name"]) ?> </td>
+					<td><?php echo htmlspecialchars($data["Province"]) ?> </td>
+					<td><?php echo htmlspecialchars($data["Duration"]) ?> </td>
+					<td><?php echo htmlspecialchars($data["Price"]) ?> $</td>
+					<td><img src=" <?php echo $imgfolder . htmlspecialchars($data["Image"]) ?>" alt="img"></td>
 					<td class="delete">
+
 						<a href="#">Update</a>
-						<a href="#">Delete</a>
+						<div class="delete-button">
+							Delete
+							<input type="submit" name="delete[]" value="<?php echo $data["locID"] ?>">
+						</div>
 					</td>
 				</tr>
 		<?php endforeach ?>
