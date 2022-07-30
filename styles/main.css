@@ -23,7 +23,7 @@ table{
 tr{
 	border: 1px lightgray solid;
 	display: grid;
-	grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 100px .5fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 tr:hover{
@@ -40,6 +40,7 @@ td{
 	padding-top: 25px;
 	text-align: center;
 	height: 40px;
+	white-space: nowrap;
 }
 
 .delete{
@@ -48,7 +49,8 @@ td{
 }
 
 .delete a{
-	margin: 0 20px;
+	margin-left: 10px;
+	margin-right: 20px;
 }
 
 .delete a:hover{
@@ -74,14 +76,20 @@ input[type="checkbox"]{
 #addnew-btn, #delete-btn{
 	all: unset;
 	background-color: var(--primary-color);
-	padding: 20px 35px;
+	padding: 20px 32px;
 	border-radius: 10px;
 	border: 2px #CC7300 solid;
 	color: white;
 	cursor: pointer;
 	margin-right: 20px;
+	font-size: 22px;
 }
 
 #addnew-btn:hover, #delete-btn:hover{
 	background-color: #F8B954;
+}
+
+td img{
+	vertical-align: top;
+	height: 100px;
 }

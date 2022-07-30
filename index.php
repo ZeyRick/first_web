@@ -12,7 +12,17 @@ if (isset($_GET['q']) ) {
 			session_destroy();
 			header("Refresh:0; url=./");
 			break;
-		
+
+		case 'backend':
+			$page = 'backend';
+			renderpage($page);
+			exit();
+			break;
+		case 'Add New Tour':
+			$page = 'add_new';
+			renderpage($page);
+			exit();
+			break;
 		default:
 			$page = 'changepfp';
 			renderpage($page);
@@ -127,6 +137,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		// code...
 	}
 
+	elseif(isset($_POST['addnew'])){
+		$name = $_POST['name'];
+		$province = $_POST['province'];
+		$duration = $_POST['duration'];
+		$price = $_POST['price'];
+		$description = $_POST['description'];
+		$image = $name . '.png';
+		//moving photo into folder
+		move_uploaded_file(	$_FILES['photo']['tmp_name'], $imgfolder . $image	);
+	
+		//setting up sql
+		$sql = 'INSERT INTO locations (Name, Province, Duration, Price, Description, Image) VALUES (:name, :province, :duration, :price, :description, :image)';
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':name'=>$name, ':province'=>$province, ':duration'=>$duration, ':price'=>$price, 'description'=>$description, ':image'=>$image]);
+
+
+	}
 
 		//change pfp
 	elseif(isset($_POST['changepfp'])){
