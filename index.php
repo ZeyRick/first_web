@@ -137,7 +137,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		// code...
 	}
 
+	//add new
 	elseif(isset($_POST['addnew'])){
+
 		$name = $_POST['name'];
 		$province = $_POST['province'];
 		$duration = $_POST['duration'];
@@ -151,12 +153,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$sql = 'INSERT INTO locations (Name, Province, Duration, Price, Description, Image) VALUES (:name, :province, :duration, :price, :description, :image)';
 		$prepared = $pdo->prepare($sql);
 		$prepared->execute([':name'=>$name, ':province'=>$province, ':duration'=>$duration, ':price'=>$price, 'description'=>$description, ':image'=>$image]);
-		echo "<meta http-equiv='refresh' content='0'>";
+
+		$response = [ 'id'=> $pdo->lastInsertId(),'photo'=>$imgfolder . $image];
+		header('Content-type: application/json');
+		echo json_encode( $response );
 		exit();
 
 	}
 
 
+	//delete
 	elseif(isset($_POST['delete'])){
 		
 	foreach($_POST['delete'] as $id):
@@ -179,8 +185,54 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		exit();
 	}
 
-		//change pfp
-		elseif(isset($_POST['changepfp'])){
+	//select
+	elseif(isset($_POST['select'])){
+		$sql = 'SELECT * FROM locations WHERE locID = :id LIMIT 1';
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute(["id"=>$_POST['select']]);
+		$data = $prepared->fetch();
+
+		$response = ['id'=>$data["locID"],'name'=>$data["Name"], 'province'=>$data["Province"], 'duration'=>$data["Duration"], 'price'=>$data["Price"], 'description'=>$data["Description"], 'image'=>$data["Image"]];
+		header('Content-type: application/json');
+		echo json_encode($response);
+		exit();
+	}
+
+	//update
+	elseif(isset($_POST['update'])){
+
+		$name = $_POST['name'];
+		$province = $_POST['province'];
+		$duration = $_POST['duration'];
+		$price = $_POST['price'];
+		$description = $_POST['description'];
+		//moving photo into folder
+		if (!isset($_FILES['photo'])){
+			$image = $_POST['photo-old'];
+		}
+
+		else{
+			
+			$image = str_replace(' ', '-', $name) . '.png';
+			move_uploaded_file(	$_FILES['photo']['tmp_name'], $imgfolder . $image	);
+		}
+
+	
+		//setting up sql
+		$sql = 'UPDATE locations SET Name = :name, Province = :province, Duration = :duration, Price = :price, Description = :description, Image = :image WHERE locID = :id';
+		$prepared = $pdo->prepare($sql);
+		$prepared->execute([':name'=>$name, ':province'=>$province, ':duration'=>$duration, ':price'=>$price, 'description'=>$description, ':image'=>$image, ":id" => $_POST['update']]);
+
+
+		echo $imgfolder . $image;
+	
+		exit();
+
+	}
+
+
+	//change pfp
+	elseif(isset($_POST['changepfp'])){
 		@unlink($pfpfolder . $_SESSION['userID'] . '.png');
 		$olfpfpname = $_FILES['pic']['name'];
 		move_uploaded_file(	$_FILES['pic']['tmp_name'], $pfpfolder	. $olfpfpname	);

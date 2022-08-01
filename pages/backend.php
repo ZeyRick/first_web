@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Traval Guide</title>
@@ -8,6 +9,8 @@
 	<link rel="stylesheet" href="./styles/general.css">
 	<link rel="stylesheet" href="./styles/main.css">
 	<link rel="stylesheet" href="./styles/modal.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	
@@ -18,9 +21,10 @@
 	<main>
 			<div class="command-buttons">
 				<button class="addnew-btn" id="addnew-btn">Add New</button>
+				<form action="./" method="post">
 				<input type="submit" id="delete-btn" value="Delete Tours">
 			</div>
-			<table>
+			<table id="table">
 				<tr>
 					<th class="checkbox">Select</th>
 					<th>ID</th>
@@ -48,8 +52,8 @@
 		foreach ($prepared->fetchAll() as $data):
 		$sum += 1;
 		?>
-		<form action="./" method="post">
-				<tr class="data-row">
+	
+				<tr class="data-row" id="<?php echo htmlspecialchars($data["locID"])  ?>">
 					<td class="checkbox"><input type="checkbox" name="delete[]" value="<?php echo htmlspecialchars($data["locID"])  ?>"></td>
 					<td><?php echo $data["locID"] ?> </td>
 					<td><?php echo htmlspecialchars($data["Name"]) ?> </td>
@@ -59,7 +63,10 @@
 					<td><img src=" <?php echo $imgfolder . htmlspecialchars($data["Image"]) ?>" alt="img"></td>
 					<td class="delete">
 
-						<a href="#">Update</a>
+						<div class="delete-button">
+							Update
+							<input id="update" type="submit" name="delete[]" value="<?php echo $data["locID"] ?>">
+						</div>
 						<div class="delete-button">
 							Delete
 							<input type="submit" name="delete[]" value="<?php echo $data["locID"] ?>">
@@ -73,9 +80,10 @@
 				<div class="sum-result">Showing <?php echo $sum ?> Datas</div>
 			</footer>
 	</main>
-
+</form>
 
 <div class="modal-container"id="modal-container">
+	<form id="addnew">
 	<div class="modal">
 		<img src="" alt="close" class="close-modal" id="close-modal">
 		<div class="input-field">
@@ -87,12 +95,15 @@
 			<div id="textarea-field"><p >Description: </p><textarea id="input-description"></textarea>
 		</div>
 	</div>
-	<button class="addnew-btn modal-addnew" id="input-addnew">ADD</button>
+	<input type="submit" class="addnew-btn modal-addnew" id="input-addnew" value="ADD" name="ADD">
+	<input type="submit" class="addnew-btn modal-addnew" id="input-update" value="UPDATE" name="UPDATE">
+	</form>
 </div>
-</form>
 
+
+	
 	<script src="./scripts/modal.js"></script>
-
-
 </body>
 </html>
+
+

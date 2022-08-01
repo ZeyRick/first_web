@@ -94,3 +94,7 @@
 .modal-addnew:hover{
 	background-color: #F8B954;
 }
+
+.input-update{
+	display: none;
+}
