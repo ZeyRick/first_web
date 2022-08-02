@@ -53,7 +53,7 @@
 		$sum += 1;
 		?>
 	
-				<tr class="data-row" id="<?php echo htmlspecialchars($data["locID"])  ?>">
+				<tr class="data-row" id="<?php echo htmlspecialchars($data["locID"])  ?>n">
 					<td class="checkbox"><input type="checkbox" name="delete[]" value="<?php echo htmlspecialchars($data["locID"])  ?>"></td>
 					<td><?php echo $data["locID"] ?> </td>
 					<td><?php echo htmlspecialchars($data["Name"]) ?> </td>
@@ -69,7 +69,7 @@
 						</div>
 						<div class="delete-button">
 							Delete
-							<input type="submit" name="delete[]" value="<?php echo $data["locID"] ?>">
+							<input id="delete" type="submit" name="delete[]" value="<?php echo $data["locID"] ?>">
 						</div>
 					</td>
 				</tr>
