@@ -145,10 +145,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$duration = $_POST['duration'];
 		$price = $_POST['price'];
 		$description = $_POST['description'];
-		$image = str_replace(' ', '-', $name) . '.png';
+		if(check_empty(array($name,$province,$duration,$price,$description)) == false)
+		{
+			echo "invalid value!!!";
+			exit;
+		}
+
 		//moving photo into folder
-		move_uploaded_file(	$_FILES['photo']['tmp_name'], $imgfolder . $image	);
+		if (!isset($_FILES['photo'])){
+			$image = "noimage";
+		}
+
+		else{
+			
+			$image = md5(rand() * time()) . '.png';
+			move_uploaded_file(	$_FILES['photo']['tmp_name'], $imgfolder . $image	);
+		}
+
 	
+		
 		//setting up sql
 		$sql = 'INSERT INTO locations (Name, Province, Duration, Price, Description, Image) VALUES (:name, :province, :duration, :price, :description, :image)';
 		$prepared = $pdo->prepare($sql);
@@ -178,9 +193,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$prepared = $pdo->prepare($sql);
 		$prepared->execute([':id'=>$id]);
 
-		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}?q=backend";
-		$escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
-		echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$url.'">';
+		
 	endforeach;
 		exit();
 	}
@@ -206,6 +219,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$duration = $_POST['duration'];
 		$price = $_POST['price'];
 		$description = $_POST['description'];
+		if(check_empty(array($name,$province,$duration,$price,$description)) == false)
+		{
+			echo "invalid value!!!";
+			exit;
+		}
 		//moving photo into folder
 		if (!isset($_FILES['photo'])){
 			$image = $_POST['photo-old'];
@@ -213,7 +231,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		else{
 			
-			$image = str_replace(' ', '-', $name) . '.png';
+			$image = md5(rand() * time()) . '.png';
 			move_uploaded_file(	$_FILES['photo']['tmp_name'], $imgfolder . $image	);
 		}
 
@@ -222,7 +240,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$sql = 'UPDATE locations SET Name = :name, Province = :province, Duration = :duration, Price = :price, Description = :description, Image = :image WHERE locID = :id';
 		$prepared = $pdo->prepare($sql);
 		$prepared->execute([':name'=>$name, ':province'=>$province, ':duration'=>$duration, ':price'=>$price, 'description'=>$description, ':image'=>$image, ":id" => $_POST['update']]);
-
 
 		echo $imgfolder . $image;
 	

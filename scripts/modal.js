@@ -9,17 +9,25 @@ $("#addnew-btn").click(function(){
 
 var cur_id = "0";
 var image = "0";
-
+var loading = false;
+loading = false;
 close_modal.addEventListener("click", ()=>{
 	modal_container.classList.remove('active');
 });
 
 //multi delete
 $("#delete-btn").click(function(){
-	var ids = $(".checkbox");
+	if (loading	== true) {return	false;};
+	loading	= true;
+	$("#loading").addClass("active");
+	var ids = $("input:checkbox:checked").map(function(){
+		return $(this).val()
+	}).get();
   	var data = new FormData;
-
-  	data.append('delete[]', cur_id);
+  	for (var i = 0; i < ids.length; i++) {
+  		data.append('delete[]',ids[i]);
+  	};
+  	data.append('delete[]', ids);
   $.ajax({
     url: "./index.php",
     type: "POST",
@@ -29,7 +37,17 @@ $("#delete-btn").click(function(){
     processData: false,
     data: data,
     success: function() {
-      $("#"+cur_id + "n").remove();
+    	$("#loading").removeClass("active");
+    	loading	= false;
+      for (var i = 0; i < ids.length; i++) {
+  				$("#"+ ids[i] + "n").remove();
+  		};
+  		
+    },
+    error: function	(){
+
+    		loading	= false;
+    		$("#loading").removeClass("active");
     }
   });
   return false;
@@ -39,6 +57,9 @@ $("#delete-btn").click(function(){
 
 //single delete
 $("#table").on("click","#delete",function(){
+	if (loading	== true) {return	false;};
+	loading	= true;
+	$("#loading").addClass("active");
   var cur_id = $(this).val();
   var data = new FormData;
   data.append('delete[]', cur_id);
@@ -51,7 +72,15 @@ $("#table").on("click","#delete",function(){
     processData: false,
     data: data,
     success: function() {
+	  loading = false;
+      $("#loading").removeClass("active");
       $("#"+cur_id + "n").remove();
+
+    },
+    error:function	(){
+    	
+    	loading = false	;
+    	$("#loading").removeClass("active");
     }
   });
   return false;
@@ -61,6 +90,9 @@ $("#table").on("click","#delete",function(){
 
 //commit update
 $("#input-update").click(function(){
+	if (loading	== true || 	!check_empty()) {return false;};
+	loading	= true;
+	$("#loading").addClass("active");
 	var name = $('#input-name').val();
 	var province = $('#input-province').val();
 	var duration = $('#input-duration').val();
@@ -78,7 +110,6 @@ $("#input-update").click(function(){
 	data.append('photo-old', image);
 	
 	$.ajax({
-		beforeSend: function(){alert("this is before")},
 		url: "./index.php",
 		type: "POST",
 		dataType: "script",
@@ -87,14 +118,18 @@ $("#input-update").click(function(){
 		processData: false,
 		data: data,
 		success: function(response2){
-			alert("0");
-			alert(cur_id);
+			modal_container.classList.remove('active');
+			loading = false;
+			$("#loading").removeClass("active");
+			clear_input();
 			var test = '<tr class="data-row" id="'+cur_id+'n"><td class="checkbox"><input type="checkbox" name="delete[]" value="'+cur_id+'"></td><td>'+cur_id+' </td><td>'+name+' </td><td>'+province+' </td><td>'+duration+'</td><td >'+price+'$</td><td><img src=" '+response2+'" alt="img"></td><td class="delete"><div class="delete-button">Update<input id="update" type="submit" name="delete[]" value="'+cur_id +'"></div><div class="delete-button">Delete<input id = "delete" type="submit" name="delete[]" value="'+cur_id+'"></div></td></tr>';
 			var target = document.getElementById(cur_id+"n");
-			alert("2");
 			target.innerHTML = test;
-			alert("3");
-			modal_container.classList.remove('active');
+		},
+		error:function	(){
+			clear_input();
+			loading = false;
+			$("#loading").removeClass("active");
 		}
 	});
 	return false;
@@ -103,6 +138,9 @@ $("#input-update").click(function(){
 
 //update 
 $("#table").on("click","#update",function(){
+	if (loading	== true) {return;};
+	loading	= true;
+	$("#loading").addClass("active");
 	cur_id = $(this).val();
 	var data = new FormData;
 	data.append('select', cur_id);
@@ -115,6 +153,8 @@ $("#table").on("click","#update",function(){
 		processData: false,
 		data: data,
 		success: function(response){
+			loading = false;
+			$("#loading").removeClass("active");
 			res = JSON.parse(response);
 			modal_container.classList.add('active');
 			$('#input-update').css('display', 'block');
@@ -126,6 +166,11 @@ $("#table").on("click","#update",function(){
 			$('#input-description').val(res["description"]);
 			image = res["image"];
 
+		},
+		error:function(){
+		
+			loading = false;
+			$("#loading").removeClass("active");
 		}
 	});
 	return false;
@@ -134,7 +179,9 @@ $("#table").on("click","#update",function(){
 
 //head addnew
 $("#input-addnew").click(function(){
-	alert("working1");
+
+	loading = true;
+	$("#loading").addClass("active");
 	var name = $('#input-name').val();
 	var province = $('#input-province').val();
 	var duration = $('#input-duration').val();
@@ -149,10 +196,8 @@ $("#input-addnew").click(function(){
 	data.append('price',price);
 	data.append('description',description);
 	data.append('addnew', 'addnew');
-	alert(province);
-	
+
 	$.ajax({
-		beforeSend:function(){alert("working3");},
 		url: "./index.php",
 		type: "POST",
 		dataType: "script",
@@ -161,13 +206,20 @@ $("#input-addnew").click(function(){
 		processData: false,
 		data: data,
 		success: function(response){
-
-			alert(response);
+			modal_container.classList.remove('active');
+			loading = false;
+			$("#loading").removeClass("active");
+			clear_input();
 			var res = JSON.parse(response);
-
 			var test = '<tr class="data-row" id="'+res["id"]+'n"><td class="checkbox"><input type="checkbox" name="delete[]" value="'+res["id"]+'"></td><td>'+res["id"]+' </td><td>'+name+' </td><td>'+province+' </td><td>'+duration+'</td><td >'+price+'$</td><td><img src=" '+res["photo"]+'" alt="img"></td><td class="delete"><div class="delete-button">Update<input id="update" type="submit" name="delete[]" value="'+ res["id"] +'"></div><div class="delete-button">Delete<input id="delete" type="submit" name="delete[]" value="'+res["id"]+'"></div></td></tr>';
 			$("tbody").append(test);
-			modal_container.classList.remove('active');
+	
+		},
+		error: function(){
+			clear_input();
+			loading = false;
+			$("#loading").removeClass("active");
+			
 		}
 
 	});
@@ -175,4 +227,22 @@ $("#input-addnew").click(function(){
 	return false;
 })
 
+//clearinput
+function clear_input(){
+	$('#input-name').val("");
+	$('#input-province').val("");
+	$('#input-duration').val("");
+	$('#input-price').val("");
+	$('#input-description').val("");
+}
 
+//check if empty
+function check_empty(){
+	
+	if ($('#input-name').val().trim() == "") {alert("Name Is Empty"); return false}
+	else if ($('#input-province').val().trim() == "") {alert("Province Is Empty"); return false}
+	else if ($('#input-duration').val().trim() == "") {alert("Duration Is Empty"); return false}
+	else if ($('#input-price').val().trim() == "") {alert("Price Is Empty"); return false}
+	else if ($('#input-description').val().trim() == "") {alert("Description Is Empty"); return false}
+	else {return true}
+}

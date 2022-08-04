@@ -7,4 +7,13 @@
 
 	}
 
+	function check_empty(array $datas){
+		foreach	($datas as $data){
+			if (trim($data) == "") {
+				return false;
+			}
+		}
+
+		return true;
+	}
 ?>

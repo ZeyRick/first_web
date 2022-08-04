@@ -21,11 +21,11 @@
 	<main>
 			<div class="command-buttons">
 				<button class="addnew-btn" id="addnew-btn">Add New</button>
-				<form action="./" method="post">
+				
 				<input type="submit" id="delete-btn" value="Delete Tours">
 			</div>
 			<table id="table">
-				<tr>
+				<thead>
 					<th class="checkbox">Select</th>
 					<th>ID</th>
 					<th>name</th>
@@ -34,7 +34,7 @@
 					<th>price</th>
 					<th>photo</th>
 					<th>edit</th>
-				</tr>
+				</thead>
 		<?php 	
 		$sum = 0;
 		//connecting to db
@@ -100,7 +100,9 @@
 	</form>
 </div>
 
-
+<div id="loading">	
+		<img src="#" alt="loading">
+</div>
 	
 	<script src="./scripts/modal.js"></script>
 </body>
