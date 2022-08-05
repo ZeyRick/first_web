@@ -5,6 +5,7 @@ $("#addnew-btn").click(function(){
 	modal_container.classList.add('active');
 	$('#input-update').css('display', 'none');
 	$('#input-addnew').css('display', 'block');
+	clear_input();
 })
 
 var cur_id = "0";
@@ -155,7 +156,7 @@ $("#table").on("click","#update",function(){
 		success: function(response){
 			loading = false;
 			$("#loading").removeClass("active");
-			res = JSON.parse(response);
+			var res = JSON.parse(response);
 			modal_container.classList.add('active');
 			$('#input-update').css('display', 'block');
 			$('#input-addnew').css('display', 'none');
@@ -164,7 +165,6 @@ $("#table").on("click","#update",function(){
 			$('#input-duration').val(res["duration"]);
 			$('#input-price').val(res["price"]);
 			$('#input-description').val(res["description"]);
-			image = res["image"];
 
 		},
 		error:function(){

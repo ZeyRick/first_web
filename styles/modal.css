@@ -15,14 +15,14 @@
 
 }
 
-.modal-container.active{
+.active{
 	z-index: 3;
 	pointer-events: auto;
 	opacity: 1;
 	
 }
 
-#loading{
+.loading{
 	position: fixed;
 	top: 0; left: 0;
 	width: 100vw;
@@ -37,11 +37,6 @@
 	opacity: 0;
 }
 
-#loading.active{
-	z-index: 3;
-	pointer-events: auto;
-	opacity: 1;
-}
 
 .modal{
 	background-color: white;
@@ -118,4 +113,11 @@
 
 .input-update{
 	display: none;
+}
+
+.active{
+	z-index: 3;
+	pointer-events: auto;
+	opacity: 1;
+	
 }

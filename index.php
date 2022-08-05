@@ -205,7 +205,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$prepared->execute(["id"=>$_POST['select']]);
 		$data = $prepared->fetch();
 
-		$response = ['id'=>$data["locID"],'name'=>$data["Name"], 'province'=>$data["Province"], 'duration'=>$data["Duration"], 'price'=>$data["Price"], 'description'=>$data["Description"], 'image'=>$data["Image"]];
+		$response = ['id'=>$data["locID"],'name'=>$data["Name"], 'province'=>$data["Province"], 'duration'=>$data["Duration"], 'price'=>$data["Price"], 'description'=>$data["Description"], 'image'=> $imgfolder . $data["Image"]];
 		header('Content-type: application/json');
 		echo json_encode($response);
 		exit();

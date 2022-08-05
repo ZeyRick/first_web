@@ -100,7 +100,7 @@
 	</form>
 </div>
 
-<div id="loading">	
+<div id="loading" class="loading">	
 		<img src="#" alt="loading">
 </div>
 	
