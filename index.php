@@ -247,7 +247,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 	}
 
-
+	
 	//change pfp
 	elseif(isset($_POST['changepfp'])){
 		@unlink($pfpfolder . $_SESSION['userID'] . '.png');

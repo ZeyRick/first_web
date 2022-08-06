@@ -80,10 +80,10 @@
 				<div class="sum-result">Showing <?php echo $sum ?> Datas</div>
 			</footer>
 	</main>
-</form>
+
 
 <div class="modal-container"id="modal-container">
-	<form id="addnew">
+
 	<div class="modal">
 		<img src="" alt="close" class="close-modal" id="close-modal">
 		<div class="input-field">
@@ -97,7 +97,7 @@
 	</div>
 	<input type="submit" class="addnew-btn modal-addnew" id="input-addnew" value="ADD" name="ADD">
 	<input type="submit" class="addnew-btn modal-addnew" id="input-update" value="UPDATE" name="UPDATE">
-	</form>
+
 </div>
 
 <div id="loading" class="loading">	

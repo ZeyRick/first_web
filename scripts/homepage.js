@@ -1,5 +1,5 @@
 var loading = false;
-
+var this_id = "";
 $("#close-btn").click(function(){
 	$(".modal-details").removeClass("active");
 });
@@ -9,7 +9,7 @@ $(".clicker").click(function(){
 	if (loading	== true) {return	false;};
 	loading	= true;
 	$("#loading").addClass("active");
-	var this_id = $(this).closest(".content").attr("id");
+	this_id = $(this).closest(".content").attr("id");
 	var data = new FormData;
 	data.append('select',this_id);
 	$.ajax({
@@ -46,4 +46,22 @@ $(".clicker").click(function(){
 	});
 
 
+});
+
+
+$("#send").click(function(){
+	if (loading	== true) {return	false;};
+	loading	= true;
+	$("#loading").addClass("active");
+	var data = new FormData;
+	data.append("send", this_id);
+	$.ajax({
+		url: "./index.php",
+		type: "POST",
+		dataType: "script",
+		cache:false,
+		contentType: false,
+		processData: false,
+		data:data,
+	});
 });

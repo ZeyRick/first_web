@@ -36,7 +36,7 @@
 				<div class="txt">
 					<div><p href="" class="clicker" id="title"><?php echo $data['Name'] ?></p></div>
 					<div><p id="description"><?php echo $data['Description'] ?></p></div>
-					<button class="clicker" id="book-btn">Book Now</button>
+					<button class="book-btn clicker" id="book-btn">Book Now</button>
 				</div>
 			</div>
 		</div>
@@ -55,23 +55,23 @@
 						<img id = "info-image" src="#" alt="image">
 					</div>
 					<div class="modal-form"> 
-						<P>Title</P>
+						<P>Title :</P>
 						<select name="" id=""></select>
-						<p>Enter Full Name</p>
+						<p>Enter Full Name :</p>
 						<input type="text">
-						<p>Enter Email</p>
+						<p>Enter Email :</p>
 						<input type="text">
-						<p>Select Country</p>
+						<p>Select Country :</p>
 						<select name="" id=""></select>
-						<p>Check-in Date</p>
+						<p>Check-in Date :</p>
 						<input type="date">
-						<p>Check-out Date</p>
+						<p>Check-out Date :</p>
 						<input type="date">
-						<p>Number of Person</p>
+						<p>Number of Person :</p>
 						<input type="text">
-						<p>Travel Detail</p>
+						<p>Travel Detail :</p>
 						<textarea></textarea>
-						<button>Send Now</button>
+						<button class="book-btn" id="send">Send Now </button>
 					</div>
 					<img src="#" alt="close" id="close-btn">
 				</div>

@@ -12,6 +12,8 @@ main{
 	grid-column-gap: 20px;
 }
 
+
+
 @viewport {
     width: extend-to-zoom 980px;
     min-zoom: 1;
@@ -122,7 +124,7 @@ main{
 
 
 
-.txt #book-btn{
+.book-btn{
 	font-size: 18px;
 	width: 120px;
 	height: 35px;
@@ -135,7 +137,7 @@ main{
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.txt #book-btn:hover{
+.book-btn:hover{
 
 	background-color: #650811;
 	background-image: linear-gradient(315deg, #a71d31 0%, #650811 74%);
@@ -187,6 +189,7 @@ main{
 	background-color: white;
 	padding: 30px 25px;
 	grid-column-gap: 18px;
+	overflow: auto;
 }
 
 
@@ -228,11 +231,24 @@ main{
 }
 
 .modal-info img{
+	width: 100%;
 	border-radius: 5px;
 	margin-top: 30px;
 	
 }
 
+.modal-form *{
+	margin-bottom: 8px;
+}
+
+.modal-form #send{
+	align-self: center;
+	margin-bottom: 0;
+}
+
+.modal-form textarea{
+	height: 80px;
+}
 #close-btn{
 	position: absolute;
 	top: 0; right: 0;
