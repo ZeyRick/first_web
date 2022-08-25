@@ -35,7 +35,7 @@ $(".clicker").click(function(){
 				$("#info-price")[0].innerHTML = res['price'];
 			}
 			
-			$("#info-description")[0].innerHTML = res['description'];
+			$("#info-description")[0].innerHTML ="    " + res['description'];
 			$("#info-image").attr("src", res["image"]);
 
 		},

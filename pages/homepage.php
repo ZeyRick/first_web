@@ -48,9 +48,18 @@
 				<div class="container">	
 					<div class="modal-info">
 						<div ><span id="info-header-name">BOOKING</span> : <p id="info-name">name</p></div>
-						<div ><span id="info-header-province">Location</span> : <p id="info-province">province</p></div>
-						<div ><span id="info-header-duration">Duration</span> : <p id="info-duration">1 Day</p></div>
-						<div ><span id="info-header-description">Tour Price</span> : <p id="info-price">Contact us for inquiry</p></div>
+						<div >
+							<img class="info-img" src="./styles/icons/location-dot-solid.svg" alt="">
+							<span id="info-header-province">Location</span> : <p id="info-province">province</p>
+						</div>
+						<div >
+							<img class="info-img" src="./styles/icons/clock-solid.svg" alt="">
+							<span id="info-header-duration">Duration</span> : <p id="info-duration">1 Day</p>
+						</div>
+						<div >
+							<img class="info-img" src="./styles/icons/dollar-sign-solid.svg" alt="">
+							<span id="info-header-description">Tour Price</span> : <p id="info-price">Contact us for inquiry</p>
+						</div>
 						<p id="info-description">this is description</p>
 						<img id = "info-image" src="#" alt="image">
 					</div>
@@ -73,7 +82,7 @@
 						<textarea></textarea>
 						<button class="book-btn" id="send">Send Now </button>
 					</div>
-					<img src="#" alt="close" id="close-btn">
+					<img src="./styles/icons/xmark-solid.svg" alt="close" id="close-btn">
 				</div>
 		</div>	
 
