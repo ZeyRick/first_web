@@ -182,12 +182,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		
 	foreach($_POST['delete'] as $id):
 		//delte img
-		$sql = 'SELECT Name FROM locations WHERE locID = :id LIMIT 1';
+		$sql = 'SELECT Name, Image FROM locations WHERE locID = :id LIMIT 1';
 		$prepared = $pdo->prepare($sql);
 		$prepared->execute([':id'=>$id]);
 		$name = $prepared->fetch();
-		@unlink($imgfolder . $name['Name'] . '.png');
-
+		@unlink($imgfolder . $name['Image']);
 		//delete data 
 		$sql = 'DELETE FROM locations WHERE locID = :id';
 		$prepared = $pdo->prepare($sql);

@@ -47,7 +47,13 @@
 	display: grid;
 	grid-template-rows: 0.05fr 1fr 130px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
 
+/*hide scrollbar*/
+.modal::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .close-modal{

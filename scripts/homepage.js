@@ -32,12 +32,10 @@ $(".clicker").click(function(){
 				$("#info-price")[0].innerHTML = "Contact us for inquiry";
 			}
 			else{
-				$("#info-price")[0].innerHTML = res['price'];
+				$("#info-price")[0].innerHTML = res['price'] + " $";
 			}
-			
 			$("#info-description")[0].innerHTML ="    " + res['description'];
 			$("#info-image").attr("src", res["image"]);
-
 		},
 		error:function(){
 			loading	= false;

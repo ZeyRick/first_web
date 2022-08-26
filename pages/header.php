@@ -7,5 +7,5 @@
 
 			<a href="./?q=backend"><div <?php if(isset($_GET['q'])): ?>style="background-color: lightgray;"<?php endif ?>>Back End</div></a>
 		</div>
-		<div class="login">login</div>
+		<div class="login"></div>
 </header>
